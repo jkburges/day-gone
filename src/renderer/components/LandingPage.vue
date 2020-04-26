@@ -1,6 +1,12 @@
 <template>
 <div class="container">
   <div>
+    <span
+      class="todo-heading">
+      What are you doing?
+    </span>
+  </div>
+  <div>
     <input
       class="todo-input"
       type="text"
@@ -67,6 +73,18 @@ export default {
   margin-top: 20px;
 }
 
+.todo-heading {
+  font-family: system-ui;
+  font-size: 36px;
+  width: 90vw;
+  border: 0px;
+  outline: none;
+  padding-top: 20px;
+  text-align: center;
+  background-color: transparent;
+  color: white;
+}
+
 .todo-input {
   font-size: 36px;
   width: 90vw;
@@ -81,7 +99,7 @@ export default {
 .todo-item {
   font-size: 24px;
   padding: 10px 0px;
-  color: yellow;
+  color: white;
 }
 
 .clear-all {
