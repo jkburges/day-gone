@@ -6,112 +6,37 @@
       What are you doing?
     </span>
   </div>
-  <div>
-    <input
-      class="todo-input"
-      type="text"
-      v-model="todoItemName"
-      placeholder="What are you doing today?"
-      @keyup.enter.prevent="addTodo"
-      >
-  </div>
-  <div class="todos">
+  <div class="work-categories">
     <ul>
       <li
-        class="todo-item"
-        v-for="todo in todos"
-        :key="todo.id"
-        @click="completeTodo(todo)"
-        >{{todo.name}}</li>
+        class="work-category"
+        v-for="workCategory in workCategories "
+        :key="workCategory.id"
+        @click="select(workCategory)"
+        >{{workCategory.label}}</li>
     </ul>
   </div>
-
-  <button class="clear-all" @click="clearTodos" v-if="todos.length > 0">CLEAR ALL</button>
 </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 export default {
     data() {
         return {
-            todoItemName: ""
-        };
-    },
-    methods: {
-        addTodo() {
-            this.$store.dispatch("ADD_TODO", this.todoItemName);
-
-            this.todoItemName = "";
-        },
-        clearTodos() {
-            this.$store.dispatch("CLEAR_TODOS");
-        },
-        completeTodo(selectedTodo) {
-            this.$store.dispatch("COMPLETE_TODO", selectedTodo.id);
+            workCategories: [
+                { id: 1, label: "cats" },
+                { id: 2, label: "dogs" },
+                { id: 3, label: "fish" },
+            ]
         }
     },
-    computed: {
-        ...mapState({
-            todos: state => state.Todo.todos
-        })
+    methods: {
+        select(workCategory) {
+            console.log(`${workCategory.label} selected`);
+        }
     }
 };
 </script>
 
 <style>
-.container {
-  height: 100vh;
-  text-align: center;
-  background-color: #30336b;
-}
-
-.todos {
-  overflow: scroll;
-  height: 70vh;
-  margin-top: 20px;
-}
-
-.todo-heading {
-  font-family: system-ui;
-  font-size: 36px;
-  width: 90vw;
-  border: 0px;
-  outline: none;
-  padding-top: 20px;
-  text-align: center;
-  background-color: transparent;
-  color: white;
-}
-
-.todo-input {
-  font-size: 36px;
-  width: 90vw;
-  border: 0px;
-  outline: none;
-  padding-top: 20px;
-  text-align: center;
-  background-color: transparent;
-  color: white;
-}
-
-.todo-item {
-  font-size: 24px;
-  padding: 10px 0px;
-  color: white;
-}
-
-.clear-all {
-  border: 1px solid white;
-  background: transparent;
-  color: white;
-  margin-top: 20px;
-  padding: 20px;
-  font-size: 18px;
-}
-
-::placeholder {
-  color: white;
-}
 </style>
